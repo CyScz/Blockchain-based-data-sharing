@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+	<title>ADD FILE</title>
+	<link rel="stylesheet" href="static/css/handle_file.css">
+	<link rel="stylesheet" href="static/css/connect_blockchain.css">
+	<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/vendor/jquery/jquery-3.5.1.js">
+	<link rel="stylesheet" href="static/vendor/bootstrap/js/bootstrap.min.js">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap">
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+		
+	<div class="grandParentContaniner">
+		<div class="parentContainer">
+
+			<div class="container">
+				<div class="alert alert-custom fade in alert-dismissable show">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<!-- <span aria-hidden="true">×</span> -->
+					</button>
+					{{ message }}
+				</div>
+			</div>
+
+			<form class="file-frm" method="post" action="/add_file" enctype="multipart/form-data">
+
+				<h3>Upload a file </h3>
+				<br><br>
+
+				<div class="form-group">
+					<label>Sender :</label>
+					<input type="text" name="sender_name" class="form-control" placeholder="Sender name" required>
+				</div>
+				
+				<div class="form-group">
+					<label>Receiver :</label>
+					<input type="text" name="receiver_name" class="form-control" placeholder="Receiver name" required>
+				</div>
+					
+				<div class="form-group">
+					<label>Enter key :</label>
+					<input type="password" name="file_key" class="form-control" placeholder="Your file key" required>
+				</div>				
+
+				<br>
+				<div class="form-group file-input">
+					<input type="file" name="file" class="" required>
+				</div>
+				
+				<br>
+
+				<!-- <a class="btn view-chain" href="{{ url_for('connect_blockchain') }}">View chain</a> -->
+				<button type="submit" class="send-btn">Submit</button><br><br>
+				<a href="{{ url_for('connect_blockchain') }}"><input type=”button” class="view-chain" value="View chain"></a>
+				
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>
+
+

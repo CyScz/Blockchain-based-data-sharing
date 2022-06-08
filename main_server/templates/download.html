@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+	<title>DOWNLOAD FILE</title>
+	<link rel="stylesheet" href="static/css/handle_file.css">
+	<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/vendor/jquery/jquery-3.5.1.js">
+	<link rel="stylesheet" href="static/vendor/bootstrap/js/bootstrap.min.js">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap">
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="grandParentContaniner">
+		<div class="parentContainer">
+
+			<div class="container">
+				<div class="alert alert-custom fade in alert-dismissable show">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<!-- <span aria-hidden="true">×</span> -->
+					</button>
+					{{ message }}
+				</div>
+			</div>
+
+			<form class="file-frm" method="post" action="/retrieve_file" enctype="multipart/form-data">
+
+				<h3>Download a file </h3>
+				<br><br>
+
+				<div class="form-group">
+					<label>Key :</label>
+					<input type="password" name="file_key" class="form-control" placeholder="Key shared by uploader" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<label>File hash :</label>
+					<input type="text" name="file_hash" class="form-control" placeholder="File hash" required>
+				</div>				
+				
+				<br>
+
+				<button type="submit" class="send-btn">Submit</button><br><br>
+				<a href="{{ url_for('connect_blockchain') }}"><input type=”button” class="view-chain" value="View chain"></a>
+					  		
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+
