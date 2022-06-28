@@ -14,8 +14,7 @@ We took inspiration from <a href="https://github.com/ruchi26/Blockchain-based-De
 
 <h3>2. Upcoming work</h3>
 Based on the current implementation, we want to incrementially improve it by changing the core logic and adding our desired fonctionalities. 
-Our application to Innosuisse is made in order for us to have enough budget to implement them.
-<b>NOTE</b> : the elements listed below correspond to the work packages we created for our proposal.
+This project being part of a research, the possibility of adding the said functionalities will depend on criteria such as time, the capacity of the team, etc.
 They are listed as follows : 
 
 <h4>2.1 Tweaking of the current implementation</h4>
