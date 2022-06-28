@@ -24,7 +24,7 @@ This also includes the work on the consensus, the node communication model, etc.
 
 <h4>2.3 Customisation of the blockchain</h4>
 After the end of the previous point, we will have a testable blockchain model. We will then proceed to the creation of a data-balance model to optimise the metrics mentioned in introduction.
-The final goal of the project, and that will go beyond the scope of our initial proposal, is to use AI to automate this step.
+The final goal of the project, and that will go beyond the scope of our initial idea, is to use AI to automate this step.
 Thus, the final tool would be able to predict the best balance to optimise the balancing of the data, which is one of the major innovations we want to implement.
 
 <h4>2.4 Finalisation of the platform</h4>
