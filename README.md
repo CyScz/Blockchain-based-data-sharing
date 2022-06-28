@@ -32,12 +32,12 @@ Thus, the final tool would be able to predict the best balance to optimise the b
 At this point, we want to basically create the final platform with all its core components.
 This ranges from a scaled network to simulate the production conditions, to the implementation of the data-balance model previously mentioned and the implementation of the IPFS part of the architecture.
 The final standard communication would like like this one :
-![communication in the architecture](https://www.kavayahsolutions.com/uploads/1/0/8/4/108465215/image3_orig.png)
+[communication in the architecture](https://www.kavayahsolutions.com/uploads/1/0/8/4/108465215/image3_orig.png)
 
 <h4>2.5 Creation of the frontend</h4>
 This is self-explanatory. As the product we want to create with our project is an application, we need to provide some sort of user interface for it.
 We might do it either in React or in Python, and we made a mockup to illustrate what we want in terms of final UI : 
-![Final UI mockup](images/ui_dashboard.png)
+[Final UI mockup](images/ui_dashboard.png)
 
 <h3>3. Possible future work</h3>
 As previously mentioned, our final goal would be for the application to be able to predict the best data balance between on and off-chain for our data sharing platform.
