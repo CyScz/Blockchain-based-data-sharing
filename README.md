@@ -10,7 +10,7 @@ The balance of data between those two elements would be the key to optimise metr
 <h3>1. Current state of the project</h3>
 The current project contains a blockchain implementation of a file sharing. 
 By starting with such an implementation, it allows us to have a better vision of how to structure the blockchain and its components (E.g. the blocks structure).
-We took inspiration from [a project](https://github.com/ruchi26/Blockchain-based-Decentralized-File-Sharing-System-using-IPFS) created by user ruchi26 to start from a working architecture.
+We took inspiration from <a href="https://github.com/ruchi26/Blockchain-based-Decentralized-File-Sharing-System-using-IPFS">a project</a> created by user ruchi26 to start from a working architecture.
 
 <h3>2. Upcoming work</h3>
 Based on the current implementation, we want to incrementially improve it by changing the core logic and adding our desired fonctionalities. 
@@ -31,13 +31,13 @@ Thus, the final tool would be able to predict the best balance to optimise the b
 <h4>2.4 Finalisation of the platform</h4>
 At this point, we want to basically create the final platform with all its core components.
 This ranges from a scaled network to simulate the production conditions, to the implementation of the data-balance model previously mentioned and the implementation of the IPFS part of the architecture.
-The final standard communication would like like this one :
-[communication in the architecture](https://www.kavayahsolutions.com/uploads/1/0/8/4/108465215/image3_orig.png)
+The final standard communication would like like <a href="https://www.kavayahsolutions.com/kavayah-blog/enterprise-blockchain-using-ipfs-for-storage-with-hyperledger-fabric">this one :</a>
+<img src="Images/communication_bc_ipfs.png" alt="Data retrieval in the architecture" class="inline"/>
 
 <h4>2.5 Creation of the frontend</h4>
 This is self-explanatory. As the product we want to create with our project is an application, we need to provide some sort of user interface for it.
 We might do it either in React or in Python, and we made a mockup to illustrate what we want in terms of final UI : 
-[Final UI mockup](images/ui_dashboard.png)
+<img src="Images/ui_dashboard.png" alt="Final UI mockup" class="inline"/>
 
 <h3>3. Possible future work</h3>
 As previously mentioned, our final goal would be for the application to be able to predict the best data balance between on and off-chain for our data sharing platform.
