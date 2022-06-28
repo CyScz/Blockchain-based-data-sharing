@@ -1,12 +1,39 @@
-# Blockchain-based-File-Sharing-System
-The aim is to share files in a peer to peer manner using a blockchain to ensure decentralization. 
+# BLOCKUSTOM
+#####Under development PoC of an application to optimise data balancing for a blockchain-based data sharing platform
 
-<h2>METHODOLOGY</h2>
+<h2>INTRODUCTION</h2>
+This repository contains the initial work made for our Innosuisse proposal.
+The goal of this application is to allow for some blockchain-based data sharing between members of a network.
+The architecture would consist of two parts : one on-chain running on Hyperledger Fabric, and one off-chain using the IPFS protocol.
+The balance of data between those two elements would be the key to optimise metrics such as transactions per second (TPS), average transaction latency, etc.
 
-<h3>4.1 Creating the Blockchain</h3>
+<h3>1. Current state of the project</h3>
+The current project contains a blockchain implementation of a file sharing. 
+By starting with such an implementation, it allows us to have a better vision of how to structure the blockchain and its components (E.g. the blocks structure).
+We took inspiration from [a project](https://github.com/ruchi26/Blockchain-based-Decentralized-File-Sharing-System-using-IPFS) created by user ruchi26 to start from a working architecture.
 
-<h4>4.1.1 Block Structure</h4>
+<h3>2. Upcoming work</h3>
+Based on the current implementation, we want to incrementially improve it by changing the core logic and adding our desired fonctionalities. 
+Our application to Innosuisse is made in order for us to have enough budget to implement them.
+NOTE : the elements listed below correspond to the work packages we created for our proposal.
+They are listed as follows : 
+
+<h4>2.1 Tweaking of the current implementation</h4>
+Based on the research that will be done in the WP2 of our proposal, we will adapt the current implementation to support the selected technologies.
+That also implies we will have to redo some of the configuration from the ground up.
+This also includes the work on the consensus, the node communication model, etc.
+
+<h4>2.3 Blockchain customisation</h4>
+After the end of the previous point, we will have a testable blockchain model. We will then proceed to the creation of a data-balance model to optimise the metrics mentioned in introduction.
+The final goal of the project, and that will go beyond the scope of our initial proposal, is to use AI to automate this step.
+Thus, the final tool would be able to predict the best balance to optimise the balancing of the data, which is one of the major innovations we want to implement.
+
+<h4>2.4 Finalisation of the platform</h4>
+
+<h4>2.4 Tweaking of the current implementation</h4>
 In Data Share, a single block in a blockchain has the following structure:<br><br>
+
+<h3>3. Possible future work</h3>
 
  
 The Block contains : <br>
