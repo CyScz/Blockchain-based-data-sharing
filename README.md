@@ -2,8 +2,8 @@
 ### Under development PoC of an application to optimise data balancing for a blockchain-based data sharing platform
 
 <h2>INTRODUCTION</h2>
-This repository contains the initial work made for our Innosuisse proposal.
-The goal of this application is to allow for some blockchain-based data sharing between members of a network.
+This repository contains the initial work we made for the aforementioned project.
+The goal of this project is to develop a blockchain-based application allowing for data sharing between members of a network.
 The architecture would consist of two parts : one on-chain running on Hyperledger Fabric, and one off-chain using the IPFS protocol.
 The balance of data between those two elements would be the key to optimise metrics such as transactions per second (TPS), average transaction latency, etc.
 
