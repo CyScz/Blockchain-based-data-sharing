@@ -31,16 +31,17 @@ Thus, the final tool would be able to predict the best balance to optimise the b
 At this point, we want to basically create the final platform with all its core components.
 This ranges from a scaled network to simulate the production conditions, to the implementation of the data-balance model previously mentioned and the implementation of the IPFS part of the architecture.
 The final standard communication would like like <a href="https://www.kavayahsolutions.com/kavayah-blog/enterprise-blockchain-using-ipfs-for-storage-with-hyperledger-fabric">this one :</a>
-<img src="../../Images/communication_bc_ipfs.png" alt="Data retrieval in the architecture" class="inline"/>
+<br>![communication in the architecture](images/communication_bc_ipfs.png)
+![communication_bc_ipfs](https://user-images.githubusercontent.com/101249719/176426066-673cfd35-c00d-4c42-a40e-cb5fcb28a40a.png)
+
 
 <h4>2.5 Creation of the frontend</h4>
 This is self-explanatory. As the product we want to create with our project is an application, we need to provide some sort of user interface for it.
 We might do it either in React or in Python, and we made a mockup to illustrate what we want in terms of final UI : 
-<img src="../../Images/ui_dashboard.png" alt="Final UI mockup" class="inline"/>
+<br>![Final UI mockup](images/ui_dashboard.png)
+![ui_dashboard](https://user-images.githubusercontent.com/101249719/176426095-054057e7-ceac-4225-8bf6-e598b0831b6e.png)
 
 <h3>3. Possible future work</h3>
 As previously mentioned, our final goal would be for the application to be able to predict the best data balance between on and off-chain for our data sharing platform.
 Therefore, implementing artificial intelligence would not only be solving this, but it would also add another massive contribution to our project.
 This will highly depend on the state of the project when we are done with our initial research, but is something to keep in mind and that we want to do.
-
-
