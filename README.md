@@ -30,16 +30,11 @@ Thus, the final tool would be able to predict the best balance to optimise the b
 <h4>2.4 Finalisation of the platform</h4>
 At this point, we want to basically create the final platform with all its core components.
 This ranges from a scaled network to simulate the production conditions, to the implementation of the data-balance model previously mentioned and the implementation of the IPFS part of the architecture.
-The final standard communication would like like <a href="https://www.kavayahsolutions.com/kavayah-blog/enterprise-blockchain-using-ipfs-for-storage-with-hyperledger-fabric">this one :</a>
-<br>![communication in the architecture](images/communication_bc_ipfs.png)
-![communication_bc_ipfs](https://user-images.githubusercontent.com/101249719/176426066-673cfd35-c00d-4c42-a40e-cb5fcb28a40a.png)
-
+The final standard communication, inspired by <a href="https://www.kavayahsolutions.com/kavayah-blog/enterprise-blockchain-using-ipfs-for-storage-with-hyperledger-fabric">this source</a>, would look like <a href="https://user-images.githubusercontent.com/101249719/176847813-ff4a426e-42f0-4012-bb1b-83519e3174ff.png">this one .</a>
 
 <h4>2.5 Creation of the frontend</h4>
 This is self-explanatory. As the product we want to create with our project is an application, we need to provide some sort of user interface for it.
-We might do it either in React or in Python, and we made a mockup to illustrate what we want in terms of final UI : 
-<br>![Final UI mockup](images/ui_dashboard.png)
-![ui_dashboard](https://user-images.githubusercontent.com/101249719/176426095-054057e7-ceac-4225-8bf6-e598b0831b6e.png)
+We might do it either in React or in Python, and <a href="https://user-images.githubusercontent.com/101249719/176847585-d5cefaf6-d008-4b69-adf2-0b871b3248d7.png"> we made a mockup </a>to illustrate what we want in terms of final UI. 
 
 <h3>3. Possible future work</h3>
 As previously mentioned, our final goal would be for the application to be able to predict the best data balance between on and off-chain for our data sharing platform.
