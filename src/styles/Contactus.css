@@ -1,0 +1,125 @@
+.message-and-team-desktop {
+    display: flex;
+}
+
+.message-layout {
+    margin-left: 21%;
+    margin-top: 5%;
+    background-color: white;
+    padding: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.message-layout-mobile {
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-right: 11%;
+    background-color: white;
+    padding: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.form-layout {
+    margin-top: 10%;
+}
+
+.form-layout-mobile {
+    text-align: center;
+}
+
+.form-layout-mobile-mt {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.team-layout {
+    margin-left: 7%;
+    margin-top: 5%;
+    margin-right: 3%;
+    font-size: 100px;
+    background-color: white;
+    padding: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.team-layout-mobile {
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-right: 11%;
+    font-size: 100px;
+    background-color: white;
+    padding: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.team-title-mobile {
+    text-align: center;
+}
+
+.faq-layout {
+    margin-left: 21%;
+    margin-right: 3%;
+    margin-top: 5%;
+    margin-bottom: 4%;
+    font-size: 100px;
+    background-color: white;
+    padding: 1%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.faq-layout-mobile {
+    margin-left: 30%;
+    margin-right: 11%;
+    margin-top: 5%;
+    margin-bottom: 4%;
+    font-size: 100px;
+    background-color: white;
+    padding: 2%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.hr-style {
+    width: 90%;
+    background-color: #2e3f52;
+    color: #2e3f52;
+    height: 3px;
+    border: 0;
+}
+
+.message-form-layout {
+    margin-bottom: 2%;
+    padding-top: 0%;
+}
+
+.members {
+    display: flex;
+}
+
+.member {
+    margin-top: 3%;
+    width: 50%;
+}
+
+.member-icon {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.3s;
+}
+
+.member-icon:hover {
+    cursor: pointer;
+    filter: blur(2px);
+}
+
+.member-title {
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.member-status {
+    font-size: 20px;
+    text-align: center;
+}

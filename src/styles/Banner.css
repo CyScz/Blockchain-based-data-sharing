@@ -1,0 +1,55 @@
+.banner-layout {
+    margin-left: 18%;
+    margin-top: 2%;
+    overflow: auto;
+}
+
+.app-title {
+    font-size: 60px;
+    margin-left: 3%;
+}
+
+.profile-settings {
+    float: right;
+    margin-right: 3%;
+    background-color:#fff;
+    padding: 1%;
+    border-radius: 50px;
+    cursor: pointer; 
+    outline: none;
+    overflow: hidden;
+}
+
+.banner-profile-image {
+    height: 30px;
+    vertical-align: middle;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 1%;
+    background-color: #506c8b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #678ab1;
+    border-radius: 10px;
+}
+
+.show {
+    display: block;
+}

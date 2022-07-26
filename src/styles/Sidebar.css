@@ -1,0 +1,105 @@
+.sidebar-layout {
+    position: fixed;
+    left: 0; 
+    top: 0;
+    bottom: 0;
+    width: 18%;
+    background: #2e3f52;
+}
+
+.unstyled {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+}
+
+.unstyled a {
+    text-decoration: none;
+}
+
+.main-nav ul {
+    /* border-top: solid 1px #fff; */
+    text-align: center;
+}
+
+.main-nav li {
+    border-bottom: solid 1px #fff;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 150%;
+    text-align: left;
+}
+
+.main-nav li:hover {
+    background: #506c8b;
+}
+
+.main-nav li:focus {
+    background: #506c8b;
+}
+    
+.main-nav a {
+    color: #fff;
+}
+
+.sidebar-logo {
+    padding-top: 10%;
+    width: 30%;
+    margin-bottom: 30%;
+}
+
+.sidebar-logo-mobile {
+    padding-top: 10%;
+    margin-bottom: 40%;
+    width: 40%;
+}
+
+.sidebar-icon {
+    padding-top: 10%;
+    padding: 5%;
+    width: 20%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+.sidebar-icon-mobile {
+    padding-top: 10%;
+    padding: 5%;
+    width: 34%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+.main-nav-mobile ul {
+    text-align: center;
+}
+
+.main-nav-mobile li {
+    border-bottom: solid 1px #fff;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    font-size: 150%;
+}
+
+.main-nav-mobile li:hover {
+    background: #506c8b;
+}
+
+.main-nav-mobile li:focus {
+    background: #506c8b;
+}
+    
+.main-nav-mobile a {
+    color: #fff;
+}
+
+.sidebar-text {
+    color: #f7f7f7;
+    margin-left: 3%;
+}
+
+.sidebar-logo-text {
+    padding-bottom: 20%;
+    font-size: 160%;
+    color: #fff;
+}
