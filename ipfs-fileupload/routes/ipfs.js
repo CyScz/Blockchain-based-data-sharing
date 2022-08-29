@@ -36,7 +36,7 @@ export const register = (app) => {
         }
 
         const file = req.files.file;
-        const filepath = Path.join(imagePath, file.name)
+        const filepath = Path.join('./tmp/') + file.name
 
         file.mv(filepath, (err) => {
             if (err) {
