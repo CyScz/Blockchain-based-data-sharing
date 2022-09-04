@@ -22,13 +22,11 @@ function checkRoot {
 }
 
 function checkInstall {
-  local test
-  if ! command -v /usr/local/go/bin/go &>/dev/null; then
-    echo "Node installation error" $BIRed
+  if ! command -v $2 &>/dev/null; then
+    echo "$1 installation error" $BIRed
     kill -s TERM $TOP_PID
   fi
-  test=$(node --version)
-  log "Node installation completed, installed version \n $test" $BIGreen
+  log "$1 installation completed, installed version \n$(eval $2)" $BIGreen
 }
 
 function processInstall {
