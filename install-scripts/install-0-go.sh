@@ -24,9 +24,10 @@ function checkRoot {
 }
 
 function addPath {
-  if ! grep -Fq "go/bin" /etc/environment; then
-    log "Registering PATH in /etc/environment" $BIYellow
-    echo 'PATH="$PATH:/usr/local/go/bin"' >>/etc/environment
+  if ! grep -Fq "go/bin" /home/$SUDO_USER/.profile; then
+    log "Registering PATH in user .profile" $BIYellow
+    echo 'PATH="$PATH:/usr/local/go/bin"'>>/home/$SUDO_USER/.profile
+      log "User '${SUDO_USER}' needs logoff/logon to apply group permissions or source ~/.profile" $BIRed
   fi
 }
 
