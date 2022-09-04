@@ -24,9 +24,9 @@ function checkRoot {
 }
 
 function addPath {
-  if [ "${cat/etc/environment | grep go}" ]; then
+  if ! grep -Fq "go/bin" /etc/environment; then
     log "Registering PATH in /etc/environment" $BIYellow
-    export PATH="$PATH:/usr/local/go/bin" >>/etc/environment
+    echo 'PATH="$PATH:/usr/local/go/bin"' >>/etc/environment
   fi
 }
 
@@ -49,6 +49,7 @@ function processInstall {
   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $FILE
 
 }
+
 ## script starts here
 
 checkRoot
