@@ -2,32 +2,8 @@
 trap "exit 1" TERM
 export TOP_PID=$$
 
-Color_Off='\e[0m'   # Text Reset
-BIYellow='\e[1;93m' # Yellow
-BIRed='\e[1;91m'    # Red
-BIGreen='\e[1;92m'  # Green
-
-## log [TEXT, COLOR]
-#  Prints the text in given color
-function log {
-  echo -e "${2}${1}${Color_Off}"
-}
-
-## Exit if not root
-function checkRoot {
-  if [ ! "$EUID" -eq 0 ]; then
-    log "Script must be run as root e.g.\n sudo ./${0##*/}" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-}
-
-function checkInstall {
-  if ! command -v $2 &>/dev/null; then
-    echo "$1 installation error" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-  log "$1 installation completed, installed version \n$(eval $2)" $BIGreen
-}
+# import utils script file
+. ./utils.sh
 
 function processInstall {
   log "${BIYellow}Downloading Docker gpg cert and set up repo${Color_Off}" $BIYellow
@@ -50,18 +26,9 @@ function processInstall {
   log "User '${SUDO_USER}' needs logoff/logon to apply group permissions" $BIRed
 }
 
-## checkInstall [programName, testCommand]
-function checkInstall {
-  if ! command -v $2 &>/dev/null; then
-    echo "$1 installation error" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-  log "$1 installation completed \n$(eval $2)" $BIGreen
-}
-
 ## script starts here
 
-checkRoot
+checkRoot true
 processInstall
 checkInstall "docker" "docker -v"
 checkInstall "docker-compose" "docker-compose -v"

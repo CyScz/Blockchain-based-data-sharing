@@ -2,26 +2,10 @@
 trap "exit 1" TERM
 export TOP_PID=$$
 
-Color_Off='\e[0m'   # Text Reset
-BIYellow='\e[1;93m' # Yellow
-BIRed='\e[1;91m'    # Red
-BIGreen='\e[1;92m'  # Green
+# import utils script file
+. ./utils.sh
 
 FILE=go1.19.linux-amd64.tar.gz
-
-## log [TEXT, COLOR]
-#  Prints the text in color
-function log {
-  echo -e "${2}${1}${Color_Off}"
-}
-
-## Exit if not root
-function checkRoot {
-  if [ ! "$EUID" -eq 0 ]; then
-    log "Script must be run as root e.g.\n sudo ./${0##*/}" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-}
 
 function addPath {
   if ! grep -Fq "go/bin" /home/$SUDO_USER/.profile; then
@@ -29,15 +13,6 @@ function addPath {
     echo 'PATH="$PATH:/usr/local/go/bin"'>>/home/$SUDO_USER/.profile
       log "User '${SUDO_USER}' needs logoff/logon to apply group permissions or source ~/.profile" $BIRed
   fi
-}
-
-## checkInstall [programName, testCommand]
-function checkInstall {
-  if ! command -v $2 &>/dev/null; then
-    echo "$1 installation error" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-  log "$1 installation completed \n$(eval $2)" $BIGreen
 }
 
 function processInstall {
@@ -48,12 +23,11 @@ function processInstall {
 
   log "Removing previous go installation and install" $BIYellow
   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $FILE
-
 }
 
 ## script starts here
 
-checkRoot
+checkRoot true
 addPath
 processInstall
 checkInstall "Go" "/usr/local/go/bin/go version"

@@ -2,27 +2,11 @@
 trap "exit 1" TERM
 export TOP_PID=$$
 
-Color_Off='\e[0m'   # Text Reset
-BIYellow='\e[1;93m' # Yellow
-BIRed='\e[1;91m'    # Red
-BIGreen='\e[1;92m'  # Green
+# import utils script file
+. ./utils.sh
 
 CONTAINER_NAME=ipfs
 FS_VOLUME_PATH=/docker
-
-## log [TEXT, COLOR]
-#  Prints the text in given color
-log() {
-  echo -e "${2}${1}${Color_Off}"
-}
-
-## Exit if not root
-function checkRoot {
-  if [ ! "$EUID" -eq 0 ]; then
-    log "Script must be run as root e.g.\n sudo ./${0##*/}" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-}
 
 ## removeContainer [CONTAINER_NAME]
 #  stops and removes container
@@ -88,18 +72,9 @@ function deploy {
   docker run -d --name $1 -v $path/001-init-0.sh:/container-init.d/001-init-0.sh -v $path/staging:/export -v $path/data:/data/ipfs -e IPFS_SWARM_KEY_FILE=/data/ipfs/swarm.key -e LIBP2P_FORCE_PNET=1 -p 4001:4001 -p 4001:4001/udp -p 0.0.0.0:8080:8080 -p 0.0.0.0:5001:5001 --restart=always ipfs/kubo:latest
 }
 
-## checkInstall [programName, testCommand]
-function checkInstall {
-  if ! command -v $2 &>/dev/null; then
-    log "$1 installation error" $BIRed
-    kill -s TERM $TOP_PID
-  fi
-  log "$1 installation completed \n$(eval $2)" $BIGreen
-}
-
 ## script starts here
 
-checkRoot
+checkRoot true
 removeContainer $CONTAINER_NAME
 removeFolder $CONTAINER_NAME
 generateSwarm
