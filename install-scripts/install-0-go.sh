@@ -5,7 +5,8 @@ export TOP_PID=$$
 # import utils script file
 . ./utils.sh
 
-FILE=go1.19.linux-amd64.tar.gz
+# refer to https://go.dev/dl/ for latest versions
+FILE=go1.19.1.linux-amd64.tar.gz
 
 function processInstall {
   if [ ! -d $FILE ]; then
