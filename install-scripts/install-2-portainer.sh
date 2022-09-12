@@ -32,6 +32,9 @@ function processInstall {
 
   log "Starting portainer-ce:latest" $BIYellow
   docker run -d -p $HTTPS_PORT:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+  log "Create user/login before timeout at https://$HOSTNAME:$HTTPS_PORT." $BIRed
+  log "Reset timeout by restarting portainer container with 'docker restart portainer'" $BIRed
 }
 
 ## script starts here
