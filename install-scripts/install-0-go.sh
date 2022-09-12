@@ -7,14 +7,6 @@ export TOP_PID=$$
 
 FILE=go1.19.linux-amd64.tar.gz
 
-function addPath {
-  if ! grep -Fq "go/bin" /home/$SUDO_USER/.profile; then
-    log "Registering PATH in user .profile" $BIYellow
-    echo 'PATH="$PATH:/usr/local/go/bin"'>>/home/$SUDO_USER/.profile
-      log "User '${SUDO_USER}' needs logoff/logon to apply group permissions or source ~/.profile" $BIRed
-  fi
-}
-
 function processInstall {
   if [ ! -d $FILE ]; then
     log "Downloading binaries" $BIYellow
@@ -28,6 +20,6 @@ function processInstall {
 ## script starts here
 
 checkRoot true
-addPath
 processInstall
+registerPath /usr/local/go/bin
 checkInstall "Go" "/usr/local/go/bin/go version"
