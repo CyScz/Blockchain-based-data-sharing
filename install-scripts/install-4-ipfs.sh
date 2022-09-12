@@ -73,7 +73,7 @@ function createFolder {
 function deploy {
   local path=$DOCKER_VOLUMES_PATH/$1
   log "Starting ipfs/kubo:latest $1" $BIYellow
-  docker run -d --name $1 -v $path/001-init-0.sh:/container-init.d/001-init-0.sh -v $path/staging:/export -v $path/data:/data/ipfs -e IPFS_SWARM_KEY_FILE=/data/ipfs/swarm.key -e LIBP2P_FORCE_PNET=1 -p 4001:4001 -p 4001:4001/udp -p 0.0.0.0:8080:8080 -p 0.0.0.0:5001:5001 --restart=always ipfs/kubo:latest
+  docker run -d --name $1 -v $path/001-init-0.sh:/container-init.d/001-init-0.sh -v $path/staging:/export -v $path/data:/data/ipfs -e IPFS_SWARM_KEY_FILE=/data/ipfs/swarm.key -e LIBP2P_FORCE_PNET=1 -p 4001:4001 -p 4001:4001/udp -p 0.0.0.0:8081:8080 -p 0.0.0.0:5001:5001 --restart=always ipfs/kubo:latest
 }
 
 ## script starts here
