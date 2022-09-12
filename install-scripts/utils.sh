@@ -41,3 +41,20 @@ function checkInstall {
   fi
   log "$1 installation completed \n$(eval $2)" $BIGreen
 }
+
+## registerPath [Path]
+#  registers a path in user profile
+function registerPath {
+  local logoutRequired=false
+  for var in "$@"; do
+    if ! grep -Fq $var /home/$SUDO_USER/.profile; then
+      log "Registering PATH in user .profile" $BIYellow
+      echo 'PATH="$PATH:'$var'"' >>/home/$SUDO_USER/.profile
+      logoutRequired=true
+    fi
+  done
+
+  if [ $logoutRequired = true ]; then
+    log "Current user '$SUDO_USER' has to log off and log on in order to reload PATH or run\nsource ~/.profile" $BIRed
+  fi
+}
