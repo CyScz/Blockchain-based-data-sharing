@@ -6,7 +6,7 @@ export TOP_PID=$$
 . ./utils.sh
 
 function processInstall {
-  log "${BIYellow}Downloading Docker gpg cert and set up repo${Color_Off}" $BIYellow
+  log "Downloading Docker gpg cert and set up repo" $BIYellow
   sudo mkdir -p /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
   echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
@@ -21,9 +21,9 @@ function processInstall {
   log "Enabling service startup" $BIYellow
   sudo systemctl enable docker
 
-  log "Adding ${SUDO_USER} to docker group" $BIYellow
+  log "Adding '$SUDO_USER' to docker group" $BIYellow
   sudo usermod -a -G docker $SUDO_USER
-  log "User '${SUDO_USER}' needs logoff/logon to apply group permissions" $BIRed
+  log "Current user '$SUDO_USER' has to log out and log on in order to reload group permissions" $BIRed
 }
 
 ## script starts here

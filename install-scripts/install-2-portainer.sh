@@ -8,23 +8,23 @@ export TOP_PID=$$
 CONTAINER_NAME=portainer
 HTTPS_PORT=9943
 
-## removeContainer [CONTAINER_NAME]
+## removeContainer [ContainerName]
 #  stops and removes container
 function removeContainer {
-  if [ "$(docker ps -aq -f name=${1})" ]; then
+  if [ "$(docker ps -aq -f name=$1)" ]; then
     log "Removing previous installation" $BIYellow
 
-    if [ "$(docker ps -aq -f status=running -f name=${1})" ]; then
-      log "Stopping '${1}'" $BIYellow
+    if [ "$(docker ps -aq -f status=running -f name=$1)" ]; then
+      log "Stopping '$1'" $BIYellow
       docker stop $1
     fi
-    log "Removing '${1}'" $BIYellow
+    log "Removing '$1'" $BIYellow
     docker rm $1
   fi
 }
 
-## deploy [CONTAINER_NAME]
-#  Create and run docker container
+## processInstall [ContainerName]
+#  creates and runs docker container
 function processInstall {
   removeContainer $1
   log "Creating $1 _data volume" $BIYellow

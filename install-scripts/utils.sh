@@ -5,7 +5,7 @@ BIYellow='\e[1;93m' # Yellow
 BIRed='\e[1;91m'    # Red
 BIGreen='\e[1;92m'  # Green
 
-## log [TEXT, COLOR]
+## log [Text, Color]
 #  Prints the text in color
 function log {
   echo -e "${2}${1}${Color_Off}"

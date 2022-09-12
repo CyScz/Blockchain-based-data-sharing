@@ -6,33 +6,34 @@ export TOP_PID=$$
 . ./utils.sh
 
 CONTAINER_NAME=ipfs
-FS_VOLUME_PATH=/docker
+DOCKER_VOLUMES_PATH=/docker
 
-## removeContainer [CONTAINER_NAME]
+## removeContainer [ContainerName]
 #  stops and removes container
 function removeContainer {
-  if [ "$(docker ps -aq -f name=${1})" ]; then
+  if [ "$(docker ps -aq -f name=$1)" ]; then
     log "Removing previous installation" $BIYellow
 
-    if [ "$(docker ps -aq -f status=running -f name=${1})" ]; then
-      log "Stopping '${1}'" $BIYellow
+    if [ "$(docker ps -aq -f status=running -f name=$1)" ]; then
+      log "Stopping '$1'" $BIYellow
       docker stop $1
     fi
-    log "Removing '${1}'" $BIYellow
+    log "Removing '$1'" $BIYellow
     docker rm $1
   fi
 }
 
-## removeFolder [CONTAINER_NAME]
+## removeFolder [FolderPath]
 function removeFolder {
-  local path="$FS_VOLUME_PATH/$1"
+  local path="$DOCKER_VOLUMES_PATH/$1"
   if [ -d $path ]; then
-    log "Remove data folders" $BIYellow
-    sudo rm -r "${path}"
+    log "Removing data folders" $BIYellow
+    sudo rm -r $path
   fi
 }
 
 ## generateSwarm
+#  generates a swarm.key file
 function generateSwarm {
   if [ ! -d swarm.key ]; then
     log "Generate new swarm.key file" $BIYellow
@@ -42,6 +43,7 @@ function generateSwarm {
 }
 
 ## generateInit
+#  generates a 001-init.sh file
 function generateInit {
   if [ ! -d 001-init.sh ]; then
     log "Generate 001-init.sh file" $BIYellow
@@ -50,12 +52,14 @@ function generateInit {
   fi
 }
 
-## createFolder [CONTAINER_NAME]
-#  create volume folder with required files
+## createFolder [ContainerName]
+#  creates volume folder with required files
 function createFolder {
-  local path="$FS_VOLUME_PATH/$1"
+  local path="$DOCKER_VOLUMES_PATH/$1"
   log "Create volume folders $path" $BIYellow
   sudo mkdir -p $path/data $path/staging
+  sudo chown root:app $path/data $path/staging
+  chmod g+s $path/data $path/staging
 
   log "Copy swarm.key in volume folder" $BIYellow
   sudo cp swarm.key $path/data
@@ -64,10 +68,10 @@ function createFolder {
   sudo cp 001-init.sh $path
 }
 
-## deploy [CONTAINER_NAME]
-#  Create and run docker container
+## deploy [ContainerName]
+#  creates and run Docker container
 function deploy {
-  local path="$FS_VOLUME_PATH/$1"
+  local path=$DOCKER_VOLUMES_PATH/$1
   log "Starting ipfs/kubo:latest $1" $BIYellow
   docker run -d --name $1 -v $path/001-init-0.sh:/container-init.d/001-init-0.sh -v $path/staging:/export -v $path/data:/data/ipfs -e IPFS_SWARM_KEY_FILE=/data/ipfs/swarm.key -e LIBP2P_FORCE_PNET=1 -p 4001:4001 -p 4001:4001/udp -p 0.0.0.0:8080:8080 -p 0.0.0.0:5001:5001 --restart=always ipfs/kubo:latest
 }
