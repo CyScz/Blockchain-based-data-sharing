@@ -149,13 +149,14 @@ async function getAllAssets(contract: Contract): Promise<void> {
 async function createAsset(contract: Contract): Promise<void> {
     console.log('\n--> Submit Transaction: CreateAsset, creates new asset with ID, Color, Size, Owner and AppraisedValue arguments');
 
+    // CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string): Promise<void>
     await contract.submitTransaction(
         'CreateAsset',
         assetId,
-        'yellow',
+        'filename.txt',
         '5',
+        'hash',
         'Tom',
-        '1300',
     );
 
     console.log('*** Transaction committed successfully');
@@ -168,6 +169,7 @@ async function createAsset(contract: Contract): Promise<void> {
 async function transferAssetAsync(contract: Contract): Promise<void> {
     console.log('\n--> Async Submit Transaction: TransferAsset, updates existing asset owner');
 
+    // TransferAsset(ctx: Context, id: string, newSender: string): Promise<string>
     const commit = await contract.submitAsync('TransferAsset', {
         arguments: [assetId, 'Saptha'],
     });
@@ -187,6 +189,7 @@ async function transferAssetAsync(contract: Contract): Promise<void> {
 async function readAssetByID(contract: Contract): Promise<void> {
     console.log('\n--> Evaluate Transaction: ReadAsset, function returns asset attributes');
 
+    // ReadAsset(ctx: Context, id: string): Promise<string>
     const resultBytes = await contract.evaluateTransaction('ReadAsset', assetId);
 
     const resultJson = utf8Decoder.decode(resultBytes);
@@ -200,14 +203,15 @@ async function readAssetByID(contract: Contract): Promise<void> {
 async function updateNonExistentAsset(contract: Contract): Promise<void>{
     console.log('\n--> Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error');
 
+    // UpdateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string): Promise<void>
     try {
         await contract.submitTransaction(
             'UpdateAsset',
             'asset70',
-            'blue',
+            'filename.txt',
             '5',
+            'hash',
             'Tomoko',
-            '300',
         );
         console.log('******** FAILED to return an error');
     } catch (error) {
