@@ -58,7 +58,7 @@ function createFolder {
   local path="$DOCKER_VOLUMES_PATH/$1"
   log "Create volume folders $path" $BIYellow
   sudo mkdir -p $path/data $path/staging
-  sudo chown root:app $path/data $path/staging
+  sudo chown root:$SUDO_USER $path/data $path/staging
   chmod g+s $path/data $path/staging
 
   log "Copy swarm.key in volume folder" $BIYellow
