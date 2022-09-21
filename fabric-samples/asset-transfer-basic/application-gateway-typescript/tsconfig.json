@@ -7,7 +7,9 @@
        "moduleResolution": "node",
        "declaration": true,
        "sourceMap": true,
-       "noImplicitAny": true
+       "noImplicitAny": true,
+       "target": "ES2022",
+       "module": "ES2022"
    },
    "include": [
        "./src/**/*"
