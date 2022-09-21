@@ -13,7 +13,6 @@ import {TextDecoder} from 'util';
 import {Asset} from '../model/Asset.js';
 
 import {fileURLToPath} from 'url';
-import {unitSize} from '../utils/sizeUtils.js';
 
 const channelName = envOrDefault('CHANNEL_NAME', 'mychannel');
 const chaincodeName = envOrDefault('CHAINCODE_NAME', 'basic');
@@ -53,6 +52,7 @@ async function addAsset(asset: Asset): Promise<void> {
         client,
         identity: await newIdentity(),
         signer: await newSigner(),
+        // Default timeouts for different gRPC calls
         evaluateOptions: () => {
             return {deadline: Date.now() + 5000}; // 5 seconds
         },
@@ -151,9 +151,6 @@ async function newSigner(): Promise<Signer> {
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
 async function createAsset(contract: Contract, asset: Asset): Promise<void> {
-    console.log(`\n--> Submit Transaction: CreateAsset, split ${asset.SplitRatio}, size: ${(Buffer.from(asset.ChunkAData).length / unitSize.MB)
-        .toLocaleString(undefined, {minimumFractionDigits: 2})} MB`);
-
     // CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string,
     //                              splitRatio: number, chunkAHash: string, chunkAData: string,
     //                              chunkBHash: string, chunkBIpfsCid: string): Promise<void>
