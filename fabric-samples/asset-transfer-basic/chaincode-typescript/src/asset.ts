@@ -20,4 +20,20 @@ export class Asset {
 
     @Property()
     public Sender: string;
+
+    @Property()
+    public SplitRatio: number;
+
+    @Property()
+    public OnChainHash: string;
+
+    @Property()
+    public OnChainData: string;
+
+    // chunkB in IPFS
+    @Property()
+    public OffChainBHash: string;
+
+    @Property()
+    public OffChainIpfsCid: string;
 }

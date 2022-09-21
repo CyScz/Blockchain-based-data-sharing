@@ -19,6 +19,11 @@ export class AssetTransferContract extends Contract {
                 Size: 5,
                 Hash: 'hash1',
                 Sender: 'Tomoko',
+                SplitRatio: 10,
+                OnChainHash: 'onChainHash1',
+                OnChainData: 'onChainData1',
+                OffChainBHash: 'offChainHash1',
+                OffChainIpfsCid: 'offChainIpfsCid1',
             },
             {
                 ID: 'asset2',
@@ -26,6 +31,11 @@ export class AssetTransferContract extends Contract {
                 Size: 5,
                 Hash: 'hash2',
                 Sender: 'Brad',
+                SplitRatio: 10,
+                OnChainHash: 'onChainHash2',
+                OnChainData: 'onChainData2',
+                OffChainBHash: 'offChainHash2',
+                OffChainIpfsCid: 'offChainIpfsCid2',
             },
             {
                 ID: 'asset3',
@@ -33,27 +43,11 @@ export class AssetTransferContract extends Contract {
                 Size: 10,
                 Hash: 'hash3',
                 Sender: 'Jin Soo',
-            },
-            {
-                ID: 'asset4',
-                Filename: 'filename4.txt',
-                Size: 10,
-                Hash: 'hash4',
-                Sender: 'Max',
-            },
-            {
-                ID: 'asset5',
-                Filename: 'filename5.txt',
-                Size: 15,
-                Hash: 'hash5',
-                Sender: 'Adriana',
-            },
-            {
-                ID: 'asset6',
-                Filename: 'filename6.txt',
-                Size: 15,
-                Hash: 'hash6',
-                Sender: 'Michel',
+                SplitRatio: 10,
+                OnChainHash: 'onChainHash3',
+                OnChainData: 'onChainData3',
+                OffChainBHash: 'offChainHash3',
+                OffChainIpfsCid: 'offChainIpfsCid3',
             },
         ];
 
@@ -69,7 +63,9 @@ export class AssetTransferContract extends Contract {
 
     // CreateAsset issues a new asset to the world state with given details.
     @Transaction()
-    public async CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string): Promise<void> {
+    public async CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string,
+                             splitRatio: number, onChainHash: string, onChainData: string,
+                             offChainHash: string, offChainIpfsCid: string): Promise<void> {
         const exists = await this.AssetExists(ctx, id);
         if (exists) {
             throw new Error(`The asset ${id} already exists`);
@@ -81,6 +77,11 @@ export class AssetTransferContract extends Contract {
             Size: size,
             Hash: hash,
             Sender: sender,
+            SplitRatio: splitRatio,
+            OnChainHash: onChainHash,
+            OnChainData: onChainData,
+            OffChainBHash: offChainHash,
+            OffChainIpfsCid: offChainIpfsCid,
         };
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(asset))));
@@ -98,7 +99,9 @@ export class AssetTransferContract extends Contract {
 
     // UpdateAsset updates an existing asset in the world state with provided parameters.
     @Transaction()
-    public async UpdateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string): Promise<void> {
+    public async UpdateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string,
+                             splitRatio: number, onChainHash: string, onChainData: string,
+                             offChainBHash: string, offChainIpfsCid: string): Promise<void> {
         const exists = await this.AssetExists(ctx, id);
         if (!exists) {
             throw new Error(`The asset ${id} does not exist`);
@@ -111,6 +114,11 @@ export class AssetTransferContract extends Contract {
             Size: size,
             Hash: hash,
             Sender: sender,
+            SplitRatio: splitRatio,
+            OnChainHash: onChainHash,
+            OnChainData: onChainData,
+            OffChainHash: offChainBHash,
+            OffChainIpfsCid: offChainIpfsCid,
         };
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         return ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(updatedAsset))));
