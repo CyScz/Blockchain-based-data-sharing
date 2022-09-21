@@ -152,8 +152,8 @@ async function newSigner(): Promise<Signer> {
  */
 async function createAsset(contract: Contract, asset: Asset): Promise<void> {
     // CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string,
-    //                              splitRatio: number, chunkAHash: string, chunkAData: string,
-    //                              chunkBHash: string, chunkBIpfsCid: string): Promise<void>
+    //                              splitRatio: number, onChainHash: string, onChainData: string,
+    //                              offChainHash: string, offChainIpfsCid: string): Promise<void>
     await contract.submitTransaction(
         'CreateAsset',
         asset.ID,
@@ -162,10 +162,10 @@ async function createAsset(contract: Contract, asset: Asset): Promise<void> {
         asset.Hash,
         asset.Sender,
         asset.SplitRatio.toString(),
-        asset.ChunkAHash,
-        asset.ChunkAData,
-        asset.ChunkBHash,
-        asset.ChunkBIpfsCid
+        asset.OnChainHash,
+        asset.OnChainData,
+        asset.OffChainHash,
+        asset.OffChainIpfsCid
     );
 
     console.log('*** Transaction committed successfully');

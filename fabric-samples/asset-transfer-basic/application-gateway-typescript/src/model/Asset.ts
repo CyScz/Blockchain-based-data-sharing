@@ -5,10 +5,10 @@ export class Asset {
     Hash = '';
     Sender = '';
     SplitRatio = 0;
-    ChunkAHash = '';
-    ChunkAData = '';
-    ChunkBHash = '';
-    ChunkBIpfsCid = '';
+    OnChainHash = '';
+    OnChainData = '';
+    OffChainHash = '';
+    OffChainIpfsCid = '';
 
     constructor(values = {}) {
         Object.assign(this, values);
@@ -22,10 +22,10 @@ export class Asset {
             + ', Hash: ' + this.Hash
             + ', Sender: ' + this.Sender
             + ', SplitRatio: ' + this.SplitRatio
-            + ', ChunkAHash: ' + this.ChunkAHash
-            + ', ChunkAData: (not included)'
-            + ', ChunkBHash: ' + this.ChunkBHash
-            + ', ChunkBIpfsCid: ' + this.ChunkBIpfsCid
+            + ', OnChainHash: ' + this.OnChainHash
+            + ', OnChainData: (not included)'
+            + ', OffChainHash: ' + this.OffChainHash
+            + ', OffChainIpfsCid: ' + this.OffChainIpfsCid
             + ' ]';
     }
 }

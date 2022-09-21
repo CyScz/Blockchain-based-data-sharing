@@ -48,10 +48,10 @@ async function main(): Promise<void> {
                     Hash: getHash(fileBuffer),
                     Sender: 'application-gateway-typescript',
                     SplitRatio: splitSize,
-                    ChunkAHash: getHash(onChainData),
-                    ChunkAData: onChainData.toString('base64'),
-                    ChunkBHash: getHash(offChainData),
-                    ChunkBIpfsCid: res.toString()
+                    OnChainHash: getHash(onChainData),
+                    OnChainData: onChainData.toString('base64'),
+                    OffChainHash: getHash(offChainData),
+                    OffChainIpfsCid: res.toString()
                 })
                     .then(_ => {
                         hyperledgerEndTime = Date.now();
