@@ -4,6 +4,7 @@ Color_Off='\e[0m'   # Text Reset
 BIYellow='\e[1;93m' # Yellow
 BIRed='\e[1;91m'    # Red
 BIGreen='\e[1;92m'  # Green
+BIWhite='\e[1;97m'  # Green
 
 ## log [Text, Color]
 #  Prints the text in color
