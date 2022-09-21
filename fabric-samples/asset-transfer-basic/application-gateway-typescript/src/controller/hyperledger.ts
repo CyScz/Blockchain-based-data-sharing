@@ -129,6 +129,8 @@ async function newGrpcConnection(): Promise<grpc.Client> {
 
     return new grpc.Client(peerEndpoint, tlsCredentials, {
         'grpc.ssl_target_name_override': peerHostAlias,
+        'grpc.max_receive_message_length': -1,
+        'grpc.max_send_message_length': -1
     });
 }
 
