@@ -41,13 +41,13 @@ function fn(splitSize: number) {
     let ipfsEndTime: number;
     let hyperledgerEndTime: number;
 
-    const fileSize: number = fs.statSync(testFilePath).size
+    const fileSize: number = fs.statSync(testFilePath).size;
     const fileBuffer: Buffer = fs.readFileSync(testFilePath);
 
     const onChainData: Buffer = fileBuffer.subarray(0, fileSize * splitSize); // 0 >> n
-    const onChainSize_base64 = Buffer.from(onChainData.toString('base64'));
+    const onChainSize_base64 = Buffer.from(onChainData.toString('base64')).byteLength;
     const offChainData: Buffer = fileBuffer.subarray(fileSize * splitSize); // n >> end
-    const offChainSize_base64 = Buffer.from(offChainData.toString('base64'))
+    const offChainSize_base64 = Buffer.from(offChainData.toString('base64')).byteLength;
 
     ipfs.addFile(Path.basename(testFilePath), offChainData)
         .then(res => {
