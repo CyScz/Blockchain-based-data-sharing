@@ -3,7 +3,7 @@ import * as crypto from 'crypto'
 import fs from 'fs';
 import * as ipfs from './controller/ipfs.js';
 import * as hl from './controller/hyperledger.js';
-import {getDateTimeString} from './utils/dateUtils.js';
+import {getDateTimeString, getTimeWithMs} from './utils/dateUtils.js';
 import {getSizeFromB, unitSize} from './utils/sizeUtils.js';
 import log from './utils/fileLog.js';
 
@@ -14,7 +14,7 @@ const resultsFileName = 'results_' + getDateTimeString(new Date(Date.now())) + '
     + (Math.floor(getSizeFromB(fs.statSync(testFilePath).size, unitSize.MB))).toString() + 'MB.csv';
 
 // csv header
-log(resultsFileName, 'split,totalSizeB,ipfsSize,ipfsDuration,hlSize,hlDuration\r\n');
+log(resultsFileName, 'Split,Total size (B),Off-chain size (B),Off-chain start time,Off-chain end time,Off-chain Duration (ms),On-chain size (B),On-chain start time,On-chain end time,On-chain duration (ms)\r\n');
 
 function getHash(buffer: Buffer): string {
     const hash = crypto.createHash('md5');
@@ -25,11 +25,11 @@ function getHash(buffer: Buffer): string {
 async function main(): Promise<void> {
     for (const splitSize of splitSizes) {
         const startTime = Date.now()
-        let ipfsEndTime: number;
-        let hyperledgerEndTime: number;
+        let offChainEndTime: number;
+        let onChainEndTime: number;
 
-        const fileBuffer: Buffer = fs.readFileSync(testFilePath);
         const fileSize: number = fs.statSync(testFilePath).size;
+        const fileBuffer: Buffer = fs.readFileSync(testFilePath);
 
         const onChainData: Buffer = fileBuffer.subarray(0, fileSize * splitSize); // 0 >> n
         const onChainSize_base64 = Buffer.from(onChainData.toString('base64')).byteLength;
@@ -38,8 +38,8 @@ async function main(): Promise<void> {
 
         await ipfs.addFile(Path.basename(testFilePath), offChainData)
             .then(res => {
-                ipfsEndTime = Date.now()
-                console.log(`Split: ${splitSize}, IPFS duration: ${ipfsEndTime - startTime} ms`);
+                offChainEndTime = Date.now()
+                console.log(`Split: ${splitSize}, IPFS duration: ${offChainEndTime - startTime} ms`);
 
                 hl.addAsset({
                     ID: startTime.toString(),
@@ -54,14 +54,13 @@ async function main(): Promise<void> {
                     OffChainIpfsCid: res.toString()
                 })
                     .then(_ => {
-                        hyperledgerEndTime = Date.now();
-                        console.info(`Split: ${splitSize} Hyperledger duration: ${hyperledgerEndTime - ipfsEndTime} ms`);
-                        console.info(`Split: ${splitSize} Total duration: ${hyperledgerEndTime - startTime} ms`);
-                        log(resultsFileName, `${splitSize},${fileSize},${offChainSize_base64},${ipfsEndTime - startTime},${onChainSize_base64},${hyperledgerEndTime - ipfsEndTime}\r\n`);
+                        onChainEndTime = Date.now();
+                        console.info(`Split: ${splitSize} Hyperledger duration: ${onChainEndTime - offChainEndTime} ms`);
+                        console.info(`Split: ${splitSize} Total duration: ${onChainEndTime - startTime} ms`);
+                        log(resultsFileName, `${splitSize},${fileSize},${offChainSize_base64},${getTimeWithMs(new Date(startTime))},${getTimeWithMs(new Date(offChainEndTime))},${offChainEndTime - startTime},${onChainSize_base64},${getTimeWithMs(new Date(offChainEndTime))},${getTimeWithMs(new Date(onChainEndTime))},${onChainEndTime - offChainEndTime}\r\n`);
                     });
             });
     }
-
 }
 
 main()
