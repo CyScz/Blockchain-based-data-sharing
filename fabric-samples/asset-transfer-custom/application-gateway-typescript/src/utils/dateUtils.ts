@@ -13,7 +13,7 @@ function getTimeWithMs(timestamp: Date) {
     const m = timestamp.getMinutes().toString();
     const s = timestamp.getSeconds().toString();
     const ms = timestamp.getMilliseconds().toString();
-    return `${h}:${m}:${s}:${ms}`;
+    return `${h}:${m}:${s}.${ms}`;
 }
 
 export {getDateTimeString, getTimeWithMs}
