@@ -14,8 +14,7 @@
         "lint": "eslint . --ext .ts",
         "prepare": "npm run build",
         "pretest": "npm run lint",
-        "start": "node -r dotenv/config dist/index.js",
-        "sync": "node -r dotenv/config dist/index_sync.js"
+        "single-async": "node -r dotenv/config dist/single_async.js",
     },
     "engineStrict": true,
     "author": "Hyperledger",

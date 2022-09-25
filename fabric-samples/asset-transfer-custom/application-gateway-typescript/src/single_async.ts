@@ -1,17 +1,33 @@
+/**
+ * single_async : Processes a single file, multiple times, once per split ratio
+ * Script does NOT wait until the upload completes before processing next ratio ->> unordered
+ *
+ * This node app takes 1 parameter (example usage : npm run single-async 10)
+ *  - filesize : size of the file in MB
+ */
+
 import * as Path from 'path';
 import * as crypto from 'crypto'
 import fs from 'fs';
+import {exec} from 'child_process'
+import {promisify} from 'util';
 import * as ipfs from './controller/ipfs.js';
 import * as hl from './controller/hyperledger.js';
 import {getDateTimeString, getTimeWithMs} from './utils/dateUtils.js';
-import {getSizeFromB, unitSize} from './utils/sizeUtils.js';
 import log from './utils/fileLog.js';
 
-const splitSizes: number[] = [.1, .2, .3, .4, .5, .7, .8, .9]
-const testFilePath: string = Path.resolve('.', 'testFile.bin');
+const execPromise = promisify(exec);
 
-const resultsFileName = 'results_' + getDateTimeString(new Date(Date.now())) + '_'
-    + (Math.floor(getSizeFromB(fs.statSync(testFilePath).size, unitSize.MB))).toString() + 'MB.csv';
+let fileSize = 10;
+const splitSizes: number[] = [.1, .2, .3, .4, .5, .7, .8, .9]
+const args = process.argv.slice(2);
+
+if (args.length > 0) {
+    fileSize = Number.parseInt(args[0]);
+    console.log(`filesize: ${fileSize}`);
+}
+
+const resultsFileName = 'results_' + getDateTimeString(new Date(Date.now())) + '_single_async.csv';
 
 // csv header
 log(resultsFileName, 'Split,Total size (B),Off-chain size (B),Off-chain start time,Off-chain end time,Off-chain Duration (ms),On-chain size (B),On-chain start time,On-chain end time,On-chain duration (ms)\r\n');
@@ -22,21 +38,32 @@ function getHash(buffer: Buffer): string {
     return hash.digest('hex');
 }
 
+async function generateFile(size: number): Promise<void> {
+    console.log(`Generating test file of ${size}MB`)
+    await execPromise(`./generateFile.sh 1 ${size} ./`);
+}
+
 async function main(): Promise<void> {
+    await generateFile(fileSize);
+
     for (const splitSize of splitSizes) {
-        const startTime = Date.now()
+        console.log(`processing split ${splitSize}`)
+
         let offChainEndTime: number;
         let onChainEndTime: number;
 
+        const testFilePath: string = Path.resolve('.', 'testFile0.bin');
         const fileSize: number = fs.statSync(testFilePath).size;
         const fileBuffer: Buffer = fs.readFileSync(testFilePath);
 
+        // split file
         const onChainData: Buffer = fileBuffer.subarray(0, fileSize * splitSize); // 0 >> n
         const onChainSize_base64 = Buffer.from(onChainData.toString('base64')).byteLength;
         const offChainData: Buffer = fileBuffer.subarray(fileSize * splitSize); // n >> end
         const offChainSize_base64 = Buffer.from(offChainData.toString('base64')).byteLength;
 
-        await ipfs.addFile(Path.basename(testFilePath), offChainData)
+        const startTime = Date.now()
+        ipfs.addFile(Path.basename(testFilePath), offChainData)
             .then(res => {
                 offChainEndTime = Date.now()
                 console.log(`Split: ${splitSize}, IPFS duration: ${offChainEndTime - startTime} ms`);
