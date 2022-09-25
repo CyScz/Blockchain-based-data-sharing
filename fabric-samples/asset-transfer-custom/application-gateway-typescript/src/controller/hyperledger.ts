@@ -53,18 +53,17 @@ async function addAsset(asset: Asset): Promise<void> {
         identity: await newIdentity(),
         signer: await newSigner(),
         // Default timeouts for different gRPC calls
-        // increased timeouts (x3 from original values)
         evaluateOptions: () => {
-            return {deadline: Date.now() + 15000}; // 15 seconds
+            return {deadline: Date.now() + 45000}; // (original value: 5 seconds)
         },
         endorseOptions: () => {
-            return {deadline: Date.now() + 45000}; // 45 seconds
+            return {deadline: Date.now() + 60000}; // (original value: 15 seconds)
         },
         submitOptions: () => {
-            return {deadline: Date.now() + 15000}; // 15 seconds
+            return {deadline: Date.now() + 45000}; // (original value: 5 seconds)
         },
         commitStatusOptions: () => {
-            return {deadline: Date.now() + 180000}; // 3 minutes
+            return {deadline: Date.now() + 180000}; // (original value: 1 minute)
         },
     });
 
