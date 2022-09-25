@@ -30,7 +30,6 @@ export class Asset {
     @Property()
     public OnChainData: string;
 
-    // chunkB in IPFS
     @Property()
     public OffChainBHash: string;
 
