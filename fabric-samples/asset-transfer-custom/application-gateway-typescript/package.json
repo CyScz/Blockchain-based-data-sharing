@@ -16,6 +16,8 @@
         "pretest": "npm run lint",
         "single-sync": "node -r dotenv/config dist/single_sync.js",
         "single-async": "node -r dotenv/config dist/single_async.js",
+        "multi-sync": "node -r dotenv/config dist/multi_sync.js",
+        "multi-async": "node -r dotenv/config dist/multi_async.js"
     },
     "engineStrict": true,
     "author": "Hyperledger",
