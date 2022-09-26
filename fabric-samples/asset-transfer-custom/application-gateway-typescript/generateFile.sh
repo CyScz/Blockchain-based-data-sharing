@@ -11,5 +11,5 @@ echo "Creating ${quantity} file(s) of ${size}MB in ${filepath}";
 
 for ((i=0; i < quantity; i++)); do
   filename=${filepath}/testFile${i}.bin;
-  dd if=/dev/urandom of="${filename}" bs=1024000 count=${size-10};
+  dd if=/dev/urandom of="${filename}" bs=1024000 count="${size}";
 done
