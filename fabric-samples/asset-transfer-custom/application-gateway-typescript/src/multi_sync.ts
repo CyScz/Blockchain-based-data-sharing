@@ -15,8 +15,8 @@ import {exec} from 'child_process'
 import {promisify} from 'util';
 import * as ipfs from './controller/ipfs.js';
 import * as hl from './controller/hyperledger.js';
-import {getDateTimeString, getTimeWithMs} from './utils/dateUtils.js';
-import log from './utils/fileLog.js';
+import {getDateTimeString, getTimeWithMs} from './utils/date.js';
+import log from './utils/logfile.js';
 
 const execPromise = promisify(exec);
 
