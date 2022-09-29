@@ -41,7 +41,6 @@ const peerEndpoint = envOrDefault('PEER_ENDPOINT', 'localhost:7051');
 const peerHostAlias = envOrDefault('PEER_HOST_ALIAS', 'peer0.org1.example.com');
 
 const utf8Decoder = new TextDecoder();
-const assetId = `asset${Date.now()}`;
 
 async function addAsset(asset: Asset): Promise<void> {
     // await displayInputParameters();
@@ -83,7 +82,7 @@ async function addAsset(asset: Asset): Promise<void> {
     }
 }
 
-async function getAssets(): Promise<void> {
+async function getAsset(assetId: string): Promise<string> {
     // await displayInputParameters();
 
     // The gRPC client connection should be shared by all Gateway connections to this endpoint.
@@ -114,9 +113,7 @@ async function getAssets(): Promise<void> {
         // Get the smart contract from the network.
         const contract = network.getContract(chaincodeName);
 
-        // Create a new asset on the ledger.
-        await getAllAssets(contract);
-
+        return await readAssetByID(contract, assetId);
     } finally {
         gateway.close();
         client.close();
@@ -192,6 +189,14 @@ async function getAllAssets(contract: Contract): Promise<void> {
     }
 }
 
+async function readAssetByID(contract: Contract, assetId: string): Promise<string> {
+    // console.log('\n--> Evaluate Transaction: ReadAsset, function returns "id1" attributes');
+
+    // ReadAsset(ctx: Context, id: string)
+    const resultBytes = await contract.evaluateTransaction('ReadAsset', assetId);
+    return utf8Decoder.decode(resultBytes);
+}
+
 /**
  * envOrDefault() will return the value of an environment variable, or a default value if the variable is undefined.
  */
@@ -214,4 +219,4 @@ async function displayInputParameters(): Promise<void> {
     console.log(`peerHostAlias:     ${peerHostAlias}`);
 }
 
-export {addAsset, getAssets}
+export {addAsset, getAsset}
