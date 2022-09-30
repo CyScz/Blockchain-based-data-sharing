@@ -10,18 +10,19 @@
         "node": ">=14"
     },
     "scripts": {
-        "build": "tsc",
-        "build:watch": "tsc -w",
+        "build": "tsc && copyfiles -f ./src/public/* ./dist/public/",
+        "build:watch": "tsc -w ",
         "lint": "eslint . --ext .ts",
         "prepare": "npm run build",
         "pretest": "npm run lint",
+        "start": "npm run build && node -r dotenv/config dist/index.js",
         "single-sync": "node -r dotenv/config dist/single_sync.js",
         "single-async": "node -r dotenv/config dist/single_async.js",
         "multi-sync": "node -r dotenv/config dist/multi_sync.js",
         "multi-async": "node -r dotenv/config dist/multi_async.js"
     },
     "engineStrict": true,
-    "author": "Hyperledger",
+    "author": "Frank Théodoloz (HEG HES-SO)",
     "license": "Apache-2.0",
     "dependencies": {
         "@grpc/grpc-js": "~1.6.7",
