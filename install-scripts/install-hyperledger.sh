@@ -73,6 +73,7 @@ function deployDemoChaincode {
 
   log "Installing demo Node.js app" $BIYellow
   cd "$FABRIC_FOLDER/fabric-samples/asset-transfer-basic/application-gateway-typescript" || exit
+  chmod +x generateFile.sh
   ./npm install
 
   log "Done" $BIGreen
