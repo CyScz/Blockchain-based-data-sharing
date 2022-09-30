@@ -74,7 +74,7 @@ function deployDemoChaincode {
   log "Installing demo Node.js app" $BIYellow
   cd "$FABRIC_FOLDER/fabric-samples/asset-transfer-basic/application-gateway-typescript" || exit
   chmod +x generateFile.sh
-  ./npm install
+  npm install
 
   log "Done" $BIGreen
 }
@@ -88,7 +88,7 @@ function deployCustomChaincode {
   if [ ! -f $FABRIC_FOLDER/customCcInstalled ]; then
     touch $FABRIC_FOLDER/customCcInstalled
     log "Copying customised material to original fabric samples" $BIYellow
-    cp -R -S .bak $SOURCES_FOLDER/$REPO_FOLDER/fabric-samples/* $FABRIC_FOLDER/fabric-samples/
+    cp -R -S .bak $SOURCES_FOLDER/$REPO_FOLDER/fabric-samples/. $FABRIC_FOLDER/fabric-samples/
   fi
 
   log "Deploying custom chaincode" $BIYellow
@@ -97,7 +97,7 @@ function deployCustomChaincode {
 
   log "Installing custom Node.js app" $BIYellow
   cd "$FABRIC_FOLDER/fabric-samples/asset-transfer-custom/application-gateway-typescript" || exit
-  ./npm install
+  npm install
 
   log "Done" $BIGreen
 }
