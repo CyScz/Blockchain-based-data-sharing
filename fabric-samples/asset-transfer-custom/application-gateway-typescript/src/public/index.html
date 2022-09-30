@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <input name="file" type="file"/>
+    <label for="splitRatio"> On-chain ratio </label>
+    <select name="splitRatio" id="splitRatio"> </select>
+    <input type="submit"/>
+</form>
+</body>
+</html>
+
+<script>
+    const select = document.getElementById('splitRatio');
+
+    for (let i = 10; i < 100; i = i + 10) {
+        const selectOption = document.createElement('option');
+        selectOption.value = i.toString();
+        selectOption.innerHTML = i.toString();
+        select.appendChild(selectOption);
+    }
+
+</script>
