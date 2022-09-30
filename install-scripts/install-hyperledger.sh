@@ -67,8 +67,13 @@ function deployDemoChaincode {
   checkFolder "$FABRIC_FOLDER/fabric-samples/" "Folder fabric-samples not exists\nPlease run ./${0##*/} --start"
   checkRunning
 
+  log "Deploying demo chaincode" $BIYellow
   cd "$FABRIC_FOLDER/fabric-samples/test-network" || exit
   ./network.sh deployCC -c mychannel -ccn basic -ccp ../asset-transfer-basic/chaincode-typescript -ccl typescript
+
+  log "Installing demo Node.js app" $BIYellow
+  cd "$FABRIC_FOLDER/fabric-samples/asset-transfer-basic/application-gateway-typescript" || exit
+  ./npm install
 
   log "Done" $BIGreen
 }
@@ -85,8 +90,13 @@ function deployCustomChaincode {
     cp -R -S .bak $SOURCES_FOLDER/$REPO_FOLDER/fabric-samples/* $FABRIC_FOLDER/fabric-samples/
   fi
 
+  log "Deploying custom chaincode" $BIYellow
   cd "$FABRIC_FOLDER/fabric-samples/test-network" || exit
   ./network.sh deployCC -c mychannel -ccn basic -ccp $CUSTOM_CC_PATH -ccl typescript
+
+  log "Installing custom Node.js app" $BIYellow
+  cd "$FABRIC_FOLDER/fabric-samples/asset-transfer-custom/application-gateway-typescript" || exit
+  ./npm install
 
   log "Done" $BIGreen
 }
