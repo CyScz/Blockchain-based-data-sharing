@@ -10,57 +10,6 @@ import {Asset} from './asset';
 @Info({title: 'AssetTransfer', description: 'Smart contract for trading assets'})
 export class AssetTransferContract extends Contract {
 
-    @Transaction()
-    public async InitLedger(ctx: Context): Promise<void> {
-        const assets: Asset[] = [
-            {
-                ID: 'asset1',
-                Filename: 'filename1.txt',
-                Size: 5,
-                Hash: 'hash1',
-                Sender: 'Tomoko',
-                SplitRatio: 10,
-                OnChainHash: 'onChainHash1',
-                OnChainData: 'onChainData1',
-                OffChainBHash: 'offChainHash1',
-                OffChainIpfsCid: 'offChainIpfsCid1',
-            },
-            {
-                ID: 'asset2',
-                Filename: 'filename2.txt',
-                Size: 5,
-                Hash: 'hash2',
-                Sender: 'Brad',
-                SplitRatio: 10,
-                OnChainHash: 'onChainHash2',
-                OnChainData: 'onChainData2',
-                OffChainBHash: 'offChainHash2',
-                OffChainIpfsCid: 'offChainIpfsCid2',
-            },
-            {
-                ID: 'asset3',
-                Filename: 'filename3.txt',
-                Size: 10,
-                Hash: 'hash3',
-                Sender: 'Jin Soo',
-                SplitRatio: 10,
-                OnChainHash: 'onChainHash3',
-                OnChainData: 'onChainData3',
-                OffChainBHash: 'offChainHash3',
-                OffChainIpfsCid: 'offChainIpfsCid3',
-            },
-        ];
-
-        for (const asset of assets) {
-            // example of how to write to world state deterministically
-            // use convention of alphabetic order
-            // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-            // when retrieving data, in any lang, the order of data will be the same and consequently also the corresonding hash
-            await ctx.stub.putState(asset.ID, Buffer.from(stringify(sortKeysRecursive(asset))));
-            console.info(`Asset ${asset.ID} initialized`);
-        }
-    }
-
     // CreateAsset issues a new asset to the world state with given details.
     @Transaction()
     public async CreateAsset(ctx: Context, id: string, filename: string, size: number, hash: string, sender: string,
